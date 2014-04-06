@@ -27,6 +27,7 @@ import shutil
 import zipfile
 import time
 
+
 class OutOfCheeseError(Exception):
     pass
 
@@ -36,7 +37,9 @@ def get_deps():
         shutil.rmtree(outdir)
     os.makedirs(outdir)
     print 'trying to get IVY'
-    res = os.system('curl -O http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.3.0/ivy-2.3.0.jar')
+    if not os.path.exists('ivy-2.3.0.jar'):
+        print 'try to get ivy'
+	res = os.system('curl -O http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.3.0/ivy-2.3.0.jar')
     assert os.path.isfile('ivy-2.3.0.jar'), 'couldn\'t get IVY'
     with open('deps.txt', 'r') as f:
         deps = [line.split() for line in f if line.strip()]
@@ -182,7 +185,7 @@ org.mongodb mongo-java-driver 2.11.4'''
 
 
 def main():
-    import docopt
+    from jy_dev import docopt
     options = docopt.docopt(__doc__, version='jy_dev 0.1a')
     
     print(options)
