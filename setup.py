@@ -5,6 +5,6 @@ setup(name='JyDev',
       description='Jython Project Maker/Manager with pydev support',
       author='Yoav Glazner',
       author_email='yoavglazner@gmail.com',
-      url='some url to git?',
+      url='https://github.com/yglazner/jy-dev',
       packages=['jy_dev'],
      )
